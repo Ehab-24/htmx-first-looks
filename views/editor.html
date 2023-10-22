@@ -1,0 +1,52 @@
+{{ define "page" }}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editor | Art</title>
+
+  <!-- htmx -->
+  <script src="https://unpkg.com/htmx.org@1.9.6"
+    integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
+  <!-- tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- SimpleMDE -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" />
+  <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+</head>
+
+<body class="px-4 bg-slate-100">
+  <h1 class="text-center w-full text-7xl tracking-tight leading-snug mt-20 mb-8 font-bold font-serif italic">
+    Art Editor
+  </h1>
+
+  <div aria-hidden="true" class="hidden">
+  </div>
+  <form hx-post="/api/posts" hx-swap="previous div "
+    class=" shadow-2xl shadow-black/30 flex flex-col bg-gray-100 rounded-md overflow-hidden">
+    <textarea id="markdown-editor" name="content" hx-trigger="keyup changed delay:500ms" hx-post="/api/"></textarea>
+
+    <button
+      class="px-6 self-start min-w-[120px] h-10 hover:bg-slate-700 rounded-md bg-slate-900 transition-all grid place-items-center text-white text-lg mb-6 mt-8 mx-6">
+      Post
+    </button>
+  </form>
+
+  <script>
+    const mde = new SimpleMDE({
+      autofocus: true,
+      autosave: true,
+      delay: 1000,
+      uniqueId: "writer-main",
+      element: document.getElementById("markdown-editor"),
+    });
+  </script>
+</body>
+
+</html>
+
+{{ end }}
