@@ -1,4 +1,4 @@
-package scripts
+package cache
 
 import (
 	"log"
@@ -8,14 +8,15 @@ import (
 	"github.com/gomarkdown/markdown"
 )
 
+var articles map[string]string = make(map[string]string)
+
 func check(err error) {
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
-func CacheArticles() map[string]string {
-
+func Init() {
 	root, err := os.Getwd()
 	check(err)
 	dir := path.Join(root, "/static/articles")
@@ -23,7 +24,6 @@ func CacheArticles() map[string]string {
 	files, err := os.ReadDir(dir)
 	check(err)
 
-	articles := make(map[string]string)
 	for _, file := range files {
 		filepath := path.Join(dir, file.Name())
 		b, err := os.ReadFile(filepath)
@@ -32,6 +32,8 @@ func CacheArticles() map[string]string {
 		content := markdown.ToHTML(b, nil, nil)
 		articles[file.Name()] = string(content)
 	}
+}
 
-	return articles
+func GetArticle(slug string) string {
+	return articles[slug]
 }

@@ -7,11 +7,34 @@
   <title>{{.Title}}</title>
   <meta name="description" content="{{.Description}}" />
 
-  {{ .Scripts }}
+  {{ .HTMLScripts }}
 </head>
 
 <body class="px-4 md:px-20 xl:px-40">
+
+  <nav class=" flex justify-center mt-8">
+    <ul class="flex w-full gap-8 items-center justify-start">
+      <li>
+        <a hx-boost="true" href="/" class="text-gray-700 transition-all hover:text-pink-700">Home</a>
+      </li>
+      <li>
+        <a hx-boost="true" href="/articles" class="text-gray-700 transition-all hover:text-pink-700">Articles</a>
+      </li>
+      <li>
+        <a hx-boost="true" href="/about" class="text-gray-700 transition-all hover:text-pink-700">About</a>
+      </li>
+      <li>
+        <a href="/editor" class="text-gray-700 duration-500 transition-all  hover:text-pink-700">Editor</a>
+      </li>
+      <li>
+      </li>
+    </ul>
+    <a href="/register" hx-boost="true"
+      class="bg-pink-500 px-6 h-10 text-white grid place-items-center whitespace-nowrap">Sign
+      Up</a>
+  </nav>
   {{ template "page" .}}
+
 </body>
 
 </html>

@@ -14,12 +14,9 @@
   </p>
 
   {{template "button"}}
-
-  <div class="bg-green-500 w-80 h-96"></div>
-  <div class="bg-orange-500 w-80 h-96"></div>
-  <div class="bg-pink-500 w-80 h-96"></div>
-  <div class="bg-sky-500 w-80 h-96"></div>
-  <div class="bg-red-500 w-80 h-96"></div>
+  <button type="button" hx-get="/api/auth/user" class="bg-pink-500 px-6 h-10 text-white grid place-items-center">
+    Status
+  </button>
 </main>
 
 {{end}}

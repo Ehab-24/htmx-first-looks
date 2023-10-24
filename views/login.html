@@ -1,0 +1,18 @@
+{{define "page"}}
+<main>
+  <div>
+  </div>
+  <form hx-post="/api/auth/login" hx-target="previous div" class="mt-12 flex-col flex">
+    <input class="px-4 mt-2 w-full h-10 border outline-none focus:border-pink-700 transition-all" type="email"
+      name="email" placeholder="Email" required>
+    <input class="px-4 mt-2 w-full h-10 border outline-none focus:border-pink-700 transition-all" type="password"
+      name="password" placeholder="Password" required>
+    <button type="submit" class="mt-2 bg-pink-500 px-6 h-10 text-white grid place-items-center">Login</button>
+  </form>
+  <p class="text-center self-center mt-4">
+    Don't have an account?&nbsp;
+    <a href="/register" hx-boost="true" class="text-white duration-500 transition-all  hover:text-pink-700">Sign up</a>
+  </p>
+  </form>
+</main>
+{{end}}

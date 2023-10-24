@@ -7,16 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Editor | Art</title>
 
-  <!-- htmx -->
-  <script src="https://unpkg.com/htmx.org@1.9.6"
-    integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni"
-    crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
-  <!-- tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- SimpleMDE -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" />
-  <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 </head>
 
 <body class="px-4 bg-slate-100">
@@ -24,11 +14,18 @@
     Art Editor
   </h1>
 
-  <div aria-hidden="true" class="hidden">
+  <div aria-hidden="true" class="text-xl text-white italic self-center text-center mb-2">
   </div>
-  <form hx-post="/api/posts" hx-swap="previous div "
+  <form hx-post="/api/posts" hx-target="previous div "
     class=" shadow-2xl shadow-black/30 flex flex-col bg-gray-100 rounded-md overflow-hidden">
-    <textarea id="markdown-editor" name="content" hx-trigger="keyup changed delay:500ms" hx-post="/api/"></textarea>
+
+    <input class="px-4 mt-2 w-full h-10 border outline-none focus:border-pink-700 transition-all" type="text"
+      name="author" placeholder="Author Name" required>
+    <input class="px-4 mt-2 w-full h-10 border outline-none focus:border-pink-700 transition-all" type="text"
+      name="title" placeholder="Article Title" required>
+    <input class="px-4 my-2 w-full h-10 border outline-none focus:border-pink-700 transition-all" type="text"
+      name="description" placeholder="Description" required>
+    <textarea id="markdown-editor" name="content"></textarea>
 
     <button
       class="px-6 self-start min-w-[120px] h-10 hover:bg-slate-700 rounded-md bg-slate-900 transition-all grid place-items-center text-white text-lg mb-6 mt-8 mx-6">
