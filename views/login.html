@@ -1,8 +1,6 @@
 {{define "page"}}
 <main>
-  <div>
-  </div>
-  <form hx-post="/api/auth/login" hx-target="previous div" class="mt-12 flex-col flex">
+  <form hx-post="/api/auth/login" hx-target="#nav-cta" class="mt-12 flex-col flex">
     <input class="px-4 mt-2 w-full h-10 border outline-none focus:border-pink-700 transition-all" type="email"
       name="email" placeholder="Email" required>
     <input class="px-4 mt-2 w-full h-10 border outline-none focus:border-pink-700 transition-all" type="password"

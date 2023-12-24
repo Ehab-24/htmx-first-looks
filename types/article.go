@@ -16,3 +16,25 @@ type Article struct {
 	CreatedAt   time.Time          `bson:"created_at"`
 	UpdatedAt   time.Time          `bson:"updated_at"`
 }
+
+type SortDirection int
+
+type ArticleField string
+
+type ArticleFilter struct {
+	Author       string
+	Title        string
+	Description  string
+	Content      string
+	CreatedAtMin time.Time
+	CreatedAtMax time.Time
+	UpdatedAtMax time.Time
+	UpdatedAtMin time.Time
+}
+
+type ArticleOptions struct {
+	Limit  int
+	Skip   int
+	SortBy ArticleField
+	SortDirection
+}

@@ -14,7 +14,6 @@ import (
 )
 
 func main() {
-
 	log.SetFlags(0)
 
 	if err := godotenv.Load(); err != nil {

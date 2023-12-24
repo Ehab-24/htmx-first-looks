@@ -17,6 +17,15 @@ func CheckAPIError(w http.ResponseWriter, err error) bool {
 	return false
 }
 
+func CheckAPIErrorWithStatus(w http.ResponseWriter, err error, message string, code int) bool {
+	if err != nil {
+		log.Println("~ api error:", err)
+		http.Error(w, message, code)
+		return true
+	}
+	return false
+}
+
 func generateJWT(secret string, key string, value interface{}) (string, error) {
 	token := jwt.New(jwt.SigningMethodHS256)
 

@@ -17,6 +17,29 @@
   <button type="button" hx-get="/api/auth/user" class="bg-pink-500 px-6 h-10 text-white grid place-items-center">
     Status
   </button>
+
+  <button id="sweet-alert" type="button" class="bg-pink-500 px-6 h-10 text-white grid place-items-center">Sweet
+    Alert</button>
+  <script>
+    document.getElementById("sweet-alert").addEventListener("click", function () {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          await new Promise((r) => setTimeout(r, 400));
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        } else {
+          console.log('cancelled')
+        }
+      });
+    });
+  </script>
 </main>
 
 {{end}}

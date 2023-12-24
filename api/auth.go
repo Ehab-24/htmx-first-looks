@@ -37,6 +37,7 @@ func getAuthRouter() http.Handler {
 	r := chi.NewRouter()
 
 	r.Post("/login", login)
+	r.Post("/logout", logout)
 	r.Get("/user", user)
 	r.Post("/register", registerUser)
 
@@ -105,6 +106,21 @@ func login(w http.ResponseWriter, r *http.Request) {
 	}
 	http.SetCookie(w, &cookie)
 
+	w.Write([]byte("<a id=\"nav-cta\" href=\"/logout\" hx-boost=\"true\" class=\"bg-pink-500 px-6 h-10 text-white grid place-items-center whitespace-nowrap\">Log Out</a>"))
+}
+
+func logout(w http.ResponseWriter, r *http.Request) {
+	cookie := http.Cookie{
+		Name:     "x-access-token",
+		Value:    "",
+		MaxAge:   -1,
+		HttpOnly: true,
+		Path:     "/",
+		Domain:   "localhost",
+		SameSite: http.SameSiteStrictMode,
+		Secure:   os.Getenv("ENV") != "development",
+	}
+	http.SetCookie(w, &cookie)
 	w.Write([]byte("success"))
 }
 
@@ -174,7 +190,7 @@ func registerUser(w http.ResponseWriter, r *http.Request) {
 	}
 	http.SetCookie(w, &cookie)
 
-	w.Write([]byte("success"))
+	w.Write([]byte("<a id=\"#nav-cta\" href=\"/logout\" hx-boost=\"true\" class=\"bg-pink-500 px-6 h-10 text-white grid place-items-center whitespace-nowrap\">Log Out</a>"))
 }
 
 //***************** Helpers *****************

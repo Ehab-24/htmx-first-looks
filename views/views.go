@@ -68,7 +68,7 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 		RootLayoutData: RootLayoutData{
 			Title:       "Art",
 			Description: "A simple blog",
-			HTMLScripts: htmlScripts[TailwindCSS] + htmlScripts[HTMX],
+			HTMLScripts: htmlScripts[TailwindCSS] + htmlScripts[HTMX] + htmlScripts[SweetAlert],
 		},
 	}
 	if api.CheckAPIError(w, err) {

@@ -2,8 +2,10 @@ package api
 
 import (
 	"context"
+	"encoding/json"
 	"log"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/Ehab-24/test/api/middleware"
@@ -16,12 +18,13 @@ import (
 
 func getPostsRouter() http.Handler {
 	r := chi.NewRouter()
-	r.With(middleware.VerifyUser).Post("/", CreatePost)
+	r.With(middleware.VerifyUser).Post("/", createPost)
+	r.Get("/", getPosts)
 
 	return r
 }
 
-func CreatePost(w http.ResponseWriter, r *http.Request) {
+func createPost(w http.ResponseWriter, r *http.Request) {
 	c := r.FormValue("content")
 	html := lib.MdToHTML([]byte(c))
 
@@ -46,4 +49,37 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Write([]byte("success"))
+}
+
+func getPosts(w http.ResponseWriter, r *http.Request) {
+
+	filter := &types.ArticleFilter{
+		Title:       r.URL.Query().Get("title"),
+		Description: r.URL.Query().Get("desctription"),
+		Content:     r.URL.Query().Get("content"),
+		Author:      r.URL.Query().Get("author"),
+	}
+
+	l, err := strconv.Atoi(r.URL.Query().Get("limit"))
+	if CheckAPIErrorWithStatus(w, err, "invalid query parameter 'limit'", http.StatusBadRequest) {
+		return
+	}
+
+	s, err := strconv.Atoi(r.URL.Query().Get("skip"))
+	if CheckAPIErrorWithStatus(w, err, "invalid query parameter 'skip'", http.StatusBadRequest) {
+		return
+	}
+
+	opts := &types.ArticleOptions{
+		SortBy:        db.CreatedAt,
+		SortDirection: db.ASC,
+		Limit:         l,
+		Skip:          s,
+	}
+
+	articles, err := db.GetArticles(filter, opts)
+	if CheckAPIError(w, err) {
+		return
+	}
+	json.NewEncoder(w).Encode(articles)
 }

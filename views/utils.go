@@ -10,6 +10,7 @@ const (
 	TailwindCSS htmlScript = "tailwindcss"
 	HTMX        htmlScript = "htmx"
 	SimpleMDE   htmlScript = "simplemde"
+	SweetAlert  htmlScript = "sweetalert"
 )
 
 var htmlScripts = map[htmlScript]template.HTML{
@@ -21,4 +22,5 @@ var htmlScripts = map[htmlScript]template.HTML{
 	SimpleMDE: `<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" />
 	`,
+	SweetAlert: `<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>`,
 }
